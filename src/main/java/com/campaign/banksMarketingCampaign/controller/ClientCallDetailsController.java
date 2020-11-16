@@ -22,7 +22,7 @@ public class ClientCallDetailsController {
         return clientCallDetails;
     }
 
-    @GetMapping("/students/id")
+    @GetMapping("/clients/id")
     public ResponseEntity<ClientCallDetails> findById(@PathVariable("id") Integer clientCallDetailsId){
 
         ClientCallDetails cld = repository.findById(clientCallDetailsId).orElseThrow(
@@ -40,7 +40,7 @@ public class ClientCallDetailsController {
     public ResponseEntity<Void> deleteClient(@PathVariable(value="id") Integer clientCallDetailsId, @RequestBody ClientCallDetails clientCallDetails) {
 
         ClientCallDetails cld = repository.findById(clientCallDetailsId).orElseThrow(
-                () -> new ResourceNotFoundException("Student not found..." + clientCallDetailsId));
+                () -> new ResourceNotFoundException("Client not found!" + clientCallDetailsId));
 
         repository.delete(cld);
         return ResponseEntity.ok().build();
@@ -52,10 +52,25 @@ public class ClientCallDetailsController {
         ClientCallDetails cld = repository.findById(clientCallDetailsId).orElseThrow(
                 () -> new ResourceNotFoundException("Client not found!" + clientCallDetailsId));
 
-        cld.setName(clientCallDetails.getName());
-        final ClientCallDetails updatedStudent = repository.save(cld);
-
-        return ResponseEntity.ok(updatedStudent);
+        cld.setId(clientCallDetails.getId());
+        cld.setJob(clientCallDetails.getJob());
+        cld.setMarital(clientCallDetails.getMarital());
+        cld.setEducation(clientCallDetails.getEducation());
+        cld.setDefaultCredit(clientCallDetails.isDefaultCredit());
+        cld.setBalance(clientCallDetails.getBalance());
+        cld.setHousing(clientCallDetails.isHousing());
+        cld.setLoan(clientCallDetails.isLoan());
+        cld.setContact(clientCallDetails.getContact());
+        cld.setDay(clientCallDetails.getDay());
+        cld.setMonth(clientCallDetails.getMonth());
+        cld.setDuration(clientCallDetails.getDuration());
+        cld.setCampaign(clientCallDetails.getCampaign());
+        cld.setPdays(clientCallDetails.getPdays());
+        cld.setPrevious(clientCallDetails.getPrevious());
+        cld.setPoutcome(clientCallDetails.getPoutcome());
+        cld.setResult(clientCallDetails.isResult());
+        final ClientCallDetails updatedClientCallDetails = repository.save(cld);
+        return ResponseEntity.ok(updatedClientCallDetails);
     }
 
 

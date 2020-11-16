@@ -17,7 +17,7 @@ public class ClientCallDetails {
     private JobTypes job;
     private MaritalStatus marital;
     private EducationLevel education;
-    private boolean defaultt;
+    private boolean defaultCredit;
     private int balance;
     private boolean housing;
     private boolean loan;
