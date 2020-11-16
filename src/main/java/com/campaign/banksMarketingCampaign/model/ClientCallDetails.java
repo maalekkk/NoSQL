@@ -14,21 +14,20 @@ import org.springframework.data.cassandra.core.mapping.Table;
 public class ClientCallDetails {
     @PrimaryKey
     private int id;
-    private int age;
-//    private JobTypes job;
-//    private MaritalStatus marital;
-//    private EducationLevel education;
-//    private boolean _default;
-//    private int balance;
-//    private boolean housing;
-//    private boolean loan;
-//    private ContactType contact;
-//    private int day;
-//    private Month month;
-//    private int duration;
-//    private int campaign;
-//    private int pdays;
-//    private int previous;
-//    private PreviousCampaignResult poutcome;
-//    private boolean result;
+    private JobTypes job;
+    private MaritalStatus marital;
+    private EducationLevel education;
+    private boolean defaultt;
+    private int balance;
+    private boolean housing;
+    private boolean loan;
+    private ContactType contact;
+    private int day;
+    private Month month;
+    private int duration;
+    private int campaign;
+    private int pdays;
+    private int previous;
+    private PreviousCampaignResult poutcome;
+    private boolean result;
 }
