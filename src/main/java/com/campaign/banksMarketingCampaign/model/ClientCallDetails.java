@@ -17,10 +17,10 @@ public class ClientCallDetails {
     private JobTypes job;
     private MaritalStatus marital;
     private EducationLevel education;
-    private boolean defaultCredit;
+    private Decision defaultCredit;
     private int balance;
-    private boolean housing;
-    private boolean loan;
+    private Decision housing;
+    private Decision loan;
     private ContactType contact;
     private int day;
     private Month month;
@@ -29,5 +29,5 @@ public class ClientCallDetails {
     private int pdays;
     private int previous;
     private PreviousCampaignResult poutcome;
-    private boolean result;
+    private Decision result;
 }

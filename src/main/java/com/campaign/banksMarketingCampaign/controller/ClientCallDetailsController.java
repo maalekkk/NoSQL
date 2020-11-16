@@ -22,7 +22,7 @@ public class ClientCallDetailsController {
         return clientCallDetails;
     }
 
-    @GetMapping("/clients/id")
+    @GetMapping("/clients/show/{id}")
     public ResponseEntity<ClientCallDetails> findById(@PathVariable("id") Integer clientCallDetailsId){
 
         ClientCallDetails cld = repository.findById(clientCallDetailsId).orElseThrow(
@@ -56,10 +56,10 @@ public class ClientCallDetailsController {
         cld.setJob(clientCallDetails.getJob());
         cld.setMarital(clientCallDetails.getMarital());
         cld.setEducation(clientCallDetails.getEducation());
-        cld.setDefaultCredit(clientCallDetails.isDefaultCredit());
+        cld.setDefaultCredit(clientCallDetails.getDefaultCredit());
         cld.setBalance(clientCallDetails.getBalance());
-        cld.setHousing(clientCallDetails.isHousing());
-        cld.setLoan(clientCallDetails.isLoan());
+        cld.setHousing(clientCallDetails.getHousing());
+        cld.setLoan(clientCallDetails.getLoan());
         cld.setContact(clientCallDetails.getContact());
         cld.setDay(clientCallDetails.getDay());
         cld.setMonth(clientCallDetails.getMonth());
@@ -68,11 +68,8 @@ public class ClientCallDetailsController {
         cld.setPdays(clientCallDetails.getPdays());
         cld.setPrevious(clientCallDetails.getPrevious());
         cld.setPoutcome(clientCallDetails.getPoutcome());
-        cld.setResult(clientCallDetails.isResult());
+        cld.setResult(clientCallDetails.getResult());
         final ClientCallDetails updatedClientCallDetails = repository.save(cld);
         return ResponseEntity.ok(updatedClientCallDetails);
     }
-
-
-
 }
