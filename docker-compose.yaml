@@ -7,10 +7,40 @@ services:
       context: .
       args:
         JAR_FILE: /springboot-cassandra.jar
+    depends_on:
+      - "cassandra-seed"
+    environment:
+      REPLICATION_FACTOR: 3
     restart: always
 
-  cassandradb:
+  cassandra-seed:
     image: cassandra
-    container_name: cassandra-db
     ports:
       - "9042:9042"
+    environment:
+      - "CASSANDRA_SEEDS=cassandra-seed"
+      - "CASSANDRA_CLUSTER_NAME=banksMarketingCampaign"
+      - "CASSANDRA_DC=datacenter"
+      - "CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch"
+
+  cassandra-node1:
+    image: cassandra
+    command: /bin/bash -c "echo 'Waiting for seed node' && sleep 30 && /docker-entrypoint.sh cassandra -f"
+    environment:
+      - "CASSANDRA_SEEDS=cassandra-seed"
+      - "CASSANDRA_CLUSTER_NAME=banksMarketingCampaign"
+      - "CASSANDRA_DC=datacenter"
+      - "CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch"
+    depends_on:
+      - "cassandra-seed"
+
+  cassandra-node2:
+    image: cassandra
+    command: /bin/bash -c "echo 'Waiting for seed node' && sleep 60 && /docker-entrypoint.sh cassandra -f"
+    environment:
+      - "CASSANDRA_SEEDS=cassandra-seed"
+      - "CASSANDRA_CLUSTER_NAME=banksMarketingCampaign"
+      - "CASSANDRA_DC=datacenter"
+      - "CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch"
+    depends_on:
+      - "cassandra-seed"
